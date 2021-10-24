@@ -10,8 +10,8 @@
         Prev Page
       </router-link>
     </template>
-    |
-    <template v-if="event.eventTotal > page * event.perPage">
+    <template v-if="page !== 1 && isFinalPage"> | </template>
+    <template v-if="isFinalPage">
       <router-link
         :to="{ name: 'event-list', query: { page: page + 1 } }"
         rel="next"
@@ -60,6 +60,10 @@ export default {
       event: (state) => state.event,
       user: (state) => state.user.user,
     }),
+    isFinalPage() {
+      const { event, page } = this;
+      return event.eventTotal > page * event.perPage;
+    },
   },
 };
 </script>
