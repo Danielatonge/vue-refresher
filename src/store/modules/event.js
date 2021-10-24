@@ -44,7 +44,7 @@ export const actions = {
         throw error;
       });
   },
-  
+
   fetchEvents({ commit, dispatch, state }, { page }) {
     return Service.getEvents(state.perPage, page)
       .then((response) => {
@@ -59,7 +59,7 @@ export const actions = {
         dispatch("notification/add", notification, { root: true });
       });
   },
-  fetchEvent({ commit, getters, dispatch }, eventId) {
+  fetchEvent({ commit, getters }, eventId) {
     const event = getters.getEventById(eventId);
     if (event) {
       commit("SET_EVENT", event);
@@ -70,13 +70,7 @@ export const actions = {
           commit("SET_EVENT", response.data);
           return response.data;
         })
-        .catch((error) => {
-          const notification = {
-            type: "error",
-            message: "There was an error fetching an event:" + error.message,
-          };
-          dispatch("notification/add", notification, { root: true });
-        });
+        
     }
   },
 };
