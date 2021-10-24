@@ -1,7 +1,8 @@
 <template>
   <div>
-    <label v-if="label">{{ label }}</label>
-    <input :value="value" @input="updateValue" v-bind="$attrs" />
+    <button v-on="$listeners" v-bind="$attrs" :class="buttonClass">
+      <slot></slot>
+    </button>
   </div>
 </template>
 
@@ -9,12 +10,8 @@
 export default {
   inheritAttrs: false,
   props: {
-    label: {
+    buttonClass: {
       type: String,
-      default: "",
-    },
-    value: {
-      type: [String, Number],
     },
   },
   methods: {

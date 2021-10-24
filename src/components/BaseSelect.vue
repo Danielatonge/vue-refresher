@@ -1,13 +1,16 @@
 <template>
   <div>
     <label v-if="label">{{ label }}</label>
-    <input :value="value" @input="updateValue" v-bind="$attrs" />
+    <select :value="value" @input="updateValue">
+      <option v-for="item in items" :key="item" :selected="item === value">
+        {{ item }}
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
 export default {
-  inheritAttrs: false,
   props: {
     label: {
       type: String,
@@ -15,6 +18,10 @@ export default {
     },
     value: {
       type: [String, Number],
+    },
+    items: {
+      type: Array,
+      required: true,
     },
   },
   methods: {
